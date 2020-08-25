@@ -1,0 +1,102 @@
+<?xml version='1.0'?>
+<robot name="alten_agv" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<material name="blue">
+	  <color rgba="0.0 0.0 0.8 1.0"/>
+	</material>
+
+	<material name="grey">
+	  <color rgba="0.2 0.2 0.2 1.0"/>
+	</material>
+
+	<material name="red">
+	  <color rgba="0.8 0.0 0.0 1.0"/>
+	</material>
+
+  <link name="base_link"> </link>
+
+
+  <!-- Caster Wheel-->
+
+
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="base_footprint" />
+  </joint>
+
+  <link name='base_footprint'>
+
+    <pose xyz="0 0 0" rpy=" 0 0 0"/> 
+
+    <inertial>
+      <mass value="0.25"/>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <inertia  
+          ixx="0.25*(0.085*0.085+0.026*0.026)/12" 
+    			ixy = "0" 
+    			ixz = "0"
+    			iyy="0.25*(0.1*0.1+0.026*0.026)/12" 
+    			iyz = "0"
+    			izz="0.25*(0.1*0.1+0.026*0.026)/12"/>
+    </inertial>
+
+    <collision >
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+       <box size="0.1 0.085 0.026"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+       <sphere radius="0.005"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+ 
+  </link>
+
+
+  <joint type="fixed" name="laser_joint">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <child link="laser_frame"/>
+    <parent link="base_link"/>
+  </joint>
+  <link name="laser_frame">
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.005"/>
+      <inertia  
+          ixx="2*0.005*0.005*0.005/5" 
+    			ixy = "0" 
+    			ixz = "0"
+    			iyy="2*0.005*0.005*0.005/5" 
+    			iyz = "0"
+    			izz="2*0.005*0.005*0.005/5"/>
+    </inertial>
+
+    <collision >
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+       <sphere radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+       <sphere radius="0.005"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+ 
+  </link>
+
+
+
+
+
+</robot>
